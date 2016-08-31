@@ -1,0 +1,39 @@
+.admin-grades-general .category-checkbox ~ ul {
+	display: none;
+}
+
+.admin-grades-general .category-checkbox:checked ~ ul {
+	display: block; 
+}
+
+.admin-grades-general .category-checkbox {
+	position: absolute;
+	margin-left: -15px;
+    height: 25px;
+    width: 20px;
+    opacity: 0;
+}
+
+.admin-grades-general a {
+	margin-left: -15px;
+}
+
+.admin-grades-general ul {
+	padding: 5px;
+}
+
+.admin-grades-general .category-checkbox:checked + label {
+	margin-left: -15px;
+	padding-left: 1.5em;
+	background: url('../pix/f/folder-open.png') no-repeat;
+}
+
+.admin-grades-general .category-checkbox + label {
+	margin-left: -15px;
+	padding-left: 1.5em;
+	background: url('../pix/f/folder.png') no-repeat;
+}
+
+.admin-grades-general ul {
+	list-style-type: none;
+}
