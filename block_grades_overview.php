@@ -81,11 +81,14 @@ class block_grades_overview extends block_base {
         $out .= html_writer::start_tag('ul');
 
         foreach ($top_categories as $category) {
-            $out .= html_writer::start_tag('li');
-            $out .= html_writer::empty_tag('input', array('type' => 'checkbox', 'class' => 'category-checkbox'));
-            $out .= html_writer::tag('label', $category->name, array('class' => 'closed'));
-            $out .= $this->draw_my_children($course_categories[$category->id], $course_categories, $courses);
-            $out .= html_writer::end_tag('li');
+            if ($this->has_children($category->id, $course_categories[$category->id]->sub_ids, $courses)) {
+                $out .= html_writer::start_tag('li');
+                $out .= html_writer::empty_tag('input', 
+                        array('type' => 'checkbox', 'class' => 'category-checkbox'));
+                $out .= html_writer::tag('label', $category->name, array('class' => 'closed'));
+                $out .= $this->draw_my_children($course_categories[$category->id], $course_categories, $courses);
+                $out .= html_writer::end_tag('li');
+            }
         }
 
         $out .= html_writer::end_tag('ul');
@@ -101,7 +104,6 @@ class block_grades_overview extends block_base {
         $out .= html_writer::start_tag('ul');
 
         foreach ($courses as $c) {
-            //var_dump($c);
             if ($c->category == $category->id) {
                 $out .= html_writer::start_tag('li');
                 $url = new moodle_url('/grade/report/grader/index.php', array('id'=>$c->id));
@@ -111,17 +113,35 @@ class block_grades_overview extends block_base {
         }
 
         foreach ($category->sub_ids as $sub_cat) {
-            $out .= html_writer::start_tag('li');
-            $out .= html_writer::empty_tag('input', array('type' => 'checkbox', 'class' => 'category-checkbox'));
-            $out .= html_writer::tag('label', '');
-            $out .= html_writer::tag('html', $course_categories[$sub_cat]->name, array('class' => 'closed'));
-            $out .= $this->draw_my_children($course_categories[$sub_cat], $course_categories, $courses);
-            $out .= html_writer::end_tag('li');
+            if ($this->has_children($sub_cat, $course_categories[$sub_cat]->sub_ids, $courses)) {
+                $out .= html_writer::start_tag('li');
+                $out .= html_writer::empty_tag('input', 
+                        array('type' => 'checkbox', 'class' => 'category-checkbox'));
+                $out .= html_writer::tag('label', '');
+                $out .= html_writer::tag('html', $course_categories[$sub_cat]->name, 
+                        array('class' => 'closed'));
+                $out .= $this->draw_my_children($course_categories[$sub_cat], $course_categories, $courses);
+                $out .= html_writer::end_tag('li');
+            }
         }
 
         $out .= html_writer::end_tag('ul');
 
         return $out;
+    }
+
+    function has_children($catid, $sub_cat, $courses) {
+        $has_subcategories = !empty($sub_cat);
+        $has_subcourses = false;
+        
+        foreach ($courses as $c) {
+            if ($c->category == $catid) {
+                $has_subcourses = true;
+                break;    
+            }
+        }
+        
+        return ($has_subcategories || $has_subcourses); 
     }
 }
 

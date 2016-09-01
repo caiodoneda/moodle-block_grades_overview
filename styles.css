@@ -14,10 +14,6 @@
     opacity: 0;
 }
 
-.admin-grades-general a {
-	margin-left: -15px;
-}
-
 .admin-grades-general ul {
 	padding: 5px;
 }
@@ -32,6 +28,11 @@
 	margin-left: -15px;
 	padding-left: 1.5em;
 	background: url('../pix/f/folder.png') no-repeat;
+}
+
+.admin-grades-general a {
+	background: url('../pix/i/course.png') no-repeat;
+	padding-left: 5px;
 }
 
 .admin-grades-general ul {
