@@ -34,6 +34,10 @@ class block_grades_overview extends block_base {
         return true;
     }
 
+    public function applicable_formats() {
+        return array('my' => true);
+    }
+
     function get_content() {
         global $CFG, $USER, $PAGE, $DB;
 
