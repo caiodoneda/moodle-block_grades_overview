@@ -24,6 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016081901;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->version   = 2016090201;        // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2015111000;        // Requires this Moodle version
 $plugin->component = 'block_grades_overview'; // Full name of the plugin (used for diagnostics)
