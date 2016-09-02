@@ -60,20 +60,13 @@ class block_grades_overview extends block_base {
         $top_categories = array();
 
         foreach ($course_categories as $cc) {
-            $cc->sub_ids = array();
-
             if ($cc->parent != 0) {
-                $rec = $cc->parent;
-                $allow_exit = 0;
-                
-                do {
-                    $course_categories[$rec]->sub_ids[$cc->id] = $cc->id;
-                    if ($course_categories[$rec]->parent != 0) {
-                        $rec = $course_categories[$rec]->parent;
-                    } else {
-                        $allow_exit = 1;
-                    }
-                } while ($allow_exit == 0);
+                if (isset($course_categories[$cc->parent]->sub_ids)) {
+                    $course_categories[$cc->parent]->sub_ids[$cc->id] = $cc->id;
+                } else {
+                    $course_categories[$cc->parent]->sub_ids = array();
+                    $course_categories[$cc->parent]->sub_ids[$cc->id] = $cc->id;
+                }
             } else {
                 $top_categories[$cc->id] = $cc;
             }

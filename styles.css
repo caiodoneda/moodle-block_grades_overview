@@ -21,17 +21,17 @@
 .admin-grades-general .category-checkbox:checked + label {
 	margin-left: -15px;
 	padding-left: 1.5em;
-	background: url('../pix/f/folder-open.png') no-repeat;
+	background: url('/pix/f/folder-open.png') no-repeat;
 }
 
 .admin-grades-general .category-checkbox + label {
 	margin-left: -15px;
 	padding-left: 1.5em;
-	background: url('../pix/f/folder.png') no-repeat;
+	background: url('/pix/f/folder.png') no-repeat;
 }
 
 .admin-grades-general a {
-	background: url('../pix/i/course.png') no-repeat;
+	background: url('/pix/i/course.png') no-repeat;
 	padding-left: 20px;
 }
 
